@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body,ul,li,p,dt,dd,h1,h2,h3,h4,form{margin:0 auto; padding:0;}
+body, td, input, textarea, button { color:#666; font:12px 宋体, Arial;}
+
+li{display:inline;}
+a:link,a:visited  { cursor:hand; color:#666;text-decoration: none;}
+a:hover {color: #F30;text-decoration: none;}
+#man{width:100%; height:90px; background:url(../images/manbg.jpg) repeat-x; margin:0 auto; border-top:#fff 1px solid; padding:0;}
+.lo{width:1000px; height:90px; background:url(../images/manbgright.jpg) no-repeat right bottom; margin:0 auto; padding:0;}
+.logo{width:420px; height:77px; margin-top:8px; margin-left:10px; display:inline; float:left;}
+#menu{width:100%; height:49px; background:url(../images/menubg.jpg) repeat-x; margin:0 auto; padding:0; background-position: 0 49;}
+.menu{width:1000px; height:45px; margin:0 auto; padding:0;}
+.nav{width:1000px; height:49px; line-height:49px; float:left;}
+.nav ul{float:left;}
+.nav li{ width:110px; height:49px; line-height:49px; text-align:center; color:#FFF; font-size:16px; font-family:微软雅黑; float:left;}
+.nav li s{  color:#FFF; text-shadow: 1px 1px #996600; }
+.nav li a:link{ color:#FFF; text-shadow: 1px 1px #996600; }
+.nav li a:visited{ color:#FFF; text-shadow: 1px 1px #996600; }
+.nav li a:hover{  width:110px; height:49px; line-height:49px; text-shadow: 1px 1px #fff; color:#333333; background:url(../images/menubghover.jpg) no-repeat bottom;   float:left;}
+.menurightbg{background:url(../images/right_menubg.jpg) no-repeat right center;}
+.menu_current{  width:110px; height:49px; line-height:49px;text-shadow: 1px 1px #fff; color:#333333; background:url(../images/menubghover.jpg) no-repeat bottom;   float:left;}
+#centbox{width:100%; overflow: hidden; background: url(../images/boxbg.jpg) repeat-x; border-top:#fff 0px solid; margin:0 auto; padding:0;}
+#foot{width:100%; height:80px; border-top:#fff 6px solid; background:url(../images/f_c5.jpg) repeat-x;  margin:0 auto; padding:0;}
+.foot{width:100%;height:60px; padding-top:10px; text-shadow: 1px 1px #fff;  text-align:center; line-height:26px; margin:0 auto; }

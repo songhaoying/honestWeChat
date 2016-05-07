@@ -1,0 +1,29 @@
+@import url('reset.css');
+/*-------------------------TABLE--------------------------*/
+table {width:100%;}
+th.checkbox {width:0px}
+table tr:hover td {background:#e4e4e4;}
+table th {
+background:#d0d0d0 url(../images/box_c.png) repeat-x top left;
+font-size:13px;
+font-weight:400;
+color:#444;
+border-bottom:1px solid #999a9b;
+text-align:center;
+font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+line-height:19px;
+padding:8px;
+}
+
+table td {
+background:#f0f0f0;
+font-size:12px;
+border-top:1px solid transparent;
+text-align: center;
+border-bottom:1px solid #fff;
+color:#666;
+font-family:"Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+line-height:19px;
+padding:8px;
+}
+/*-------------------------TABLE--------------------------*/

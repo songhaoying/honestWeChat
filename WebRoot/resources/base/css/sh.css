@@ -1,0 +1,912 @@
+/*======================�ؼ���ʽ  begin=================================*/
+input[type="text"]{
+	border: 1 solid #D0D0D0; 
+	HEIGHT: 20px;  
+} 
+input[type="button"]{
+	HEIGHT: 24px; 
+	COLOR: #7D7D7D;
+	width: 60px;
+}
+.pagiLink  input[type="button"]{
+	width:20px;
+}
+/*======================�ؼ���ʽ  begin=================================*/
+
+
+/*======================��ݱ���б���ʽ  begin=================================*/
+
+table.grid5 {
+	border: 1px solid #D1D1D1;
+	border-top: 1;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 99.4%;
+	margin-left:3px;
+}
+
+table.grid5 thead {
+	font-size: 11pt;;
+	background-color: #EFEFEF;
+}
+
+table.grid5 th {
+	padding: 3px 0;
+	border: 1px solid #BC8F8F;
+	font-size: 13px;
+	text-align: center;
+	background-color: #F2F2F2;
+	font-family: "宋体";
+	height: 1px; 
+}
+
+table.grid5 tr{
+	height: 23px;
+}
+
+table.grid5 td {
+	border: #BC8F8F 1px solid;
+	padding: 2px;;
+	font-size: 12px;
+}
+
+table.grid5 tbody tr:hover {
+	background-color: #EEE8AA;
+}
+
+table.grid5 .odd {
+	background-color: #e7f3c6;
+}
+/*======================��ݱ���б���ʽ  end=================================*/
+
+
+/*======================������ʽ  begin=================================*/
+.caption {
+	font-size: 12px;
+	font-weight: bold;
+	background: transparent url(../img/icon_3.gif) no-repeat left;
+	text-indent: 20px;
+	background-position: left 3px;
+	padding: 3px; 
+}
+
+.caption2 {
+	font-size: 12px; 
+	background: transparent url(../img/icon_3.gif) no-repeat left;
+	text-indent: 20px;
+	background-position: left 3px;
+	padding: 3px; 
+}
+
+.caption3 {
+	font-size: 12px;
+	font-weight: bold;
+	text-indent: 20px;
+	background-position: left 3px;
+	padding: 3px; 
+}
+
+.tab_bj {
+	background-repeat: repeat-y;
+	background-position: right;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #F08F8F;
+	margin: 0px 0px 0px 1px;
+	font-family: Verdana, sans-serif;
+	font-size: 12px; 
+}
+/*======================������ʽ  end=================================*/
+
+
+/*======================��ݱ���б���ʽ  begin=================================*/
+.box-body{
+	background-color: #EEEEEE;
+}
+.operation{
+	background-color: #EEEEEE;
+}
+/*======================��ǩ����  begin=================================*/
+.nTab {
+	float: left;
+	width: 100%;
+	margin: 0 auto;
+	background: #EFEFEF;
+	border-bottom: 0px #C7C7CD solid;
+	background-position: left;
+	background-repeat: repeat-y;
+	margin-bottom: 0px;
+}
+
+.nTab .TabTitle {
+	clear: both;
+	height: 26px;
+	overflow: hidden;
+}
+
+.nTab .TabTitle ul {
+	margin: 0;
+	padding: 0;
+}
+
+.nTab .TabTitle li {
+	float: left;
+	width: 90px;
+	cursor: pointer;
+	padding-top: 6px;
+	padding-right: 1px;
+	padding-left: 1px;
+	padding-bottom: 7px;
+	list-style-type: none;
+}
+
+.nTab .TabTitle .active {
+	background: url(../../../resources/img/extimg/images/tab_bg1.gif) left
+		-25px no-repeat;
+	border-left: 0px #C7C7CD solid;
+	border-top: 0px #C7C7CD solid;
+	border-bottom: 0px #fff solid;
+}
+
+.nTab .TabTitle .normal {
+	background: url("../../../resources/img/extimg/images/tab_bg1.gif");
+	border-top: 0px #C7C7CD solid;
+	border-bottom: 0px #C7C7CD solid;
+}
+
+.nTab .TabContent {
+	width: auto;
+	background: #fff;
+	margin: 0px auto;
+	padding: 0px 0 0 0;
+	border-right: 1px #C7C7CD solid;
+	border-left: 1px #C7C7CD solid;
+}
+
+.none {
+	display: none;
+}
+/*======================��ǩ����  end=================================*/
+
+
+
+/*======================��ѡ���table��ʽ  begin=================================*/
+.text{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; course:hand; margin:0 auto;}
+
+/*======================��ѡ���table��ʽ  begin=================================*/
+
+
+
+.query_tab{
+	font-size: 12px;
+	width: 99%;
+}
+/*======================��ѡ���table��ʽ  end=================================*/
+
+
+/*======================tabҳ����ʽ  begin=================================*/
+	/*tabspan.js*/ /*div */
+.tabspan {
+	width: 100%;
+}
+
+/*div ul*/
+.tabspan-tabs {
+	border-bottom: 7px solid #f5f5f5;
+	padding: 0;
+	margin: 0px 0px 0px 1px;
+	float: left;
+	width: 100%;
+	color:white;
+}
+
+/*div ul li*/
+.tabspan-tab {
+	float: left;
+	list-style: none;
+	margin-right: 2px;
+	cursor: pointer;
+	background: url(../../../resources/base/img/tabspan-title-bg.gif) no-repeat;
+	width: 62px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+	
+}
+
+.tabspan-tab2 {
+	float: left;
+	list-style: none;
+	margin-right: -5px;
+	cursor: pointer;
+	background: url(../../../resources/base/img/tabspan-title-bg2.gif) no-repeat;
+	width: 96px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+	color: white;
+	
+}
+
+.tabspan-tab3 {
+	float: left;
+	list-style: none;
+	margin-right: 2px;
+	cursor: pointer;
+	background: url(../../../resources/base/img/tabspan-title-bg3.gif) no-repeat;
+	width: 130px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+	color: white;
+	
+}
+
+/*div ul li.selected*/
+.tabspan-tabs .selected {
+	cursor: auto;
+	color: #d0131a;
+	background: url(../../../resources/base/img/tabspan-title.gif) no-repeat;
+}
+
+.tabspan-tabs .selected2 {
+	cursor: auto;
+	color: #d0131a;
+	background: url(../../../resources/base/img/tabspan-title2.gif) no-repeat;
+}
+
+.tabspan-tabs .selected3 {
+	cursor: auto;
+	color: #d0131a;
+	background: url(../../../resources/base/img/tabspan-title3.gif) no-repeat;
+}
+
+/*div ul li span*/
+.tabspan-tabTitle {
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 21px;
+}
+
+/*div*/
+.tabspan-tabBodys {
+	clear: both;
+}
+
+/*div div */
+.tabspan-tabBody {
+	width: 100%;
+}
+
+/*div div.collapsed */
+.tabspan-tabBodys .collapsed {
+	display: none;
+}
+
+
+
+.tabspan_t {
+	width: 100%;
+}
+
+/*div ul*/
+.tabspan-tabs_t {
+	padding: 0;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	background-color:#F5FBFF;
+}
+.tabspan-tabs_t2 {
+	float:left;
+	border-bottom: 1 solid #5BDEFF;
+	float: left;
+	height:28px;
+	background-color:#F5FBFF;
+}
+/*div ul li*/
+.tabspan-tab_t {
+	float: left;
+	list-style: none;
+	margin-right: 0;
+	cursor: pointer;
+	width: 100px;
+	height: 28px;
+	border-right:1 solid #5BDEFF;
+	border-bottom: 1 solid #5BDEFF;
+	vertical-align: middle;
+	text-align: center;
+	background-color:#F5FBFF;
+	
+}
+.tabspan-tab2_t {
+	float: left;
+	list-style: none;
+	margin-right: -5px;
+	cursor: pointer;
+	border:1 solid #5BDEFF;
+	width: 100%;
+	height: 25px;
+	vertical-align: middle;
+	text-align: center;
+	background-color:#F5FBFF;
+	
+}
+
+.tabspan-tab3_t {
+	float: left;
+	list-style: none;
+	margin-right: 0px;
+	cursor: pointer;
+	width: 100px;
+	height: 28px;
+	vertical-align: middle;
+	text-align: center;
+	background-color:#F5FBFF;
+	
+}
+
+/*div ul li.selected*/
+.tabspan-tabs_t .selected_t {
+	cursor: auto;
+	/*background: url(../../../resources/base/img/tabspan-title.gif) no-repeat;*/
+	background-color:white;
+	border-bottom:0;
+}
+.tabspan-tabs_t .selected2_t {
+	cursor: auto;
+	background-color:white;
+	border-bottom:0;
+}
+
+.tabspan-tabs_t .selected3_t {
+	cursor: auto;
+	background-color:white;
+	border-bottom:0;
+}
+/*div ul li span*/
+.tabspan-tabTitle_t {
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 26px;
+}
+.tabspan-tabTitle_t2 {
+	float:left;
+	width:23px;
+	height:26px;
+	BACKGROUND-IMAGE: url(../../../resources/base/img/xjiantou.jpg); 
+}
+.tabspan-tabTitle_t3 {
+	float:left;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 26px;
+}
+.tabspan-tabTitle_t4 {
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 26px;
+}
+/*div*/
+.tabspan-tabBodys_t {
+	clear: both;
+}
+
+/*div div */
+.tabspan-tabBody_t {
+	width: 100%;
+}
+
+/*div div.collapsed */
+.tabspan-tabBodys_t .collapsed_t {
+	display: none;
+} 
+/*======================tabҳ����ʽ  end=================================*/
+
+
+/*======================�����ͼ��ʄ1¤7  begin=================================*/
+
+
+.table_veiw_bj {
+	background-color: #F5F5F5;  
+}
+
+table.table_view{
+	border: 1px solid #CECFC6;
+	font-size: 12px;  
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 99.4%;
+	margin-left:3px;
+}
+
+table.table_view tr{ 
+	 border: 1px solid #CECFC6;
+}
+table.table_view td{ 
+	 border: 1px solid #CECFC6;
+	 height: 28px;  
+	 padding-left: 8px;
+	 padding-right: 8px;
+	 padding-top:4px;
+	 padding-bottom: 4px;
+	 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*======================�����ͼ��ʄ1¤7  begin=================================*/
+
+
+/*======================����Ԥ������ͼ��ͼ��ʽ  begin=================================*/
+.ge_touch_title3
+{
+	font-family: "����";
+    font-size:12px;
+    color:#F08F8F;
+    cursor:hand;
+}
+.unify-info-layout2 {
+	padding-left: 5px;
+}
+
+.unify-info-layout8 {
+	width: 120px;
+}
+.unify-info-font11 {
+	font-size: 12px;
+}
+.unify-info-line2 {
+	border-left: 1px solid #D28B7D;
+	padding-left: 5px;
+}
+.text-point {
+	background: url(../../../resources/base/img/dian.gif) no-repeat scroll 0 0;
+	vertical-align: middle;
+	text-indent: 6px;
+	background-position: left;
+	font-size: 12px
+}
+.unify,.unify .layout-top,.unify .layout-left,.unify .layout-right,.unify .layout-bottom
+	{
+	width: 100%;
+	padding: 0;
+	word-break: keep-all; /*ie*/
+	white-space: nowrap; /*firefox*/
+}
+.unify-info  th,.unify-info td {
+	font-size: 12px;
+	word-break: keep-all; /*ie*/
+	white-space: nowrap; /*firefox*/
+}
+/***********************************客户分群＝�?�客户视图＝》视图查看器  begin*************************/
+.unify,.unify .layout-top,.unify .layout-left,.unify .layout-right,.unify .layout-bottom
+	{
+	width: 100%;
+	padding: 0;
+	word-break: keep-all; /*ie*/
+	white-space: nowrap; /*firefox*/
+}
+
+/*.unify .layout-left,.unify .layout-right{width:50%;}*/
+.unify .node-container {
+	
+}
+
+.unify .node-title {
+	margin-bottom: 5px;
+	background-color: #FFFFFF;
+	border-top: 1px solid #ABBBCB;
+	cursor: pointer;
+	word-break: keep-all; /*ie*/
+	white-space: nowrap; /*firefox*/
+	padding: 1px;
+}
+
+.unify .node-title1 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title2 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title3 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title4 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title5 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title6 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title7 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.unify .node-title-img {
+	background: url(../../../resources/base/img/sprites1.png) no-repeat scroll -2px -226px;
+	width: 45px;
+	height: 16px;
+	vertical-align: middle;
+	cursor: hand;
+}
+
+.unify .node-container-collapsed .node-title-img {
+	background: url(../../../resources/base/img/sprites1.png) no-repeat scroll -2px -193px;
+	cursor: hand;
+}
+
+.unify .node-container-collapsed .node-body {
+	display: none;
+}
+
+.unify .node-link {
+	color: #FF0000;
+}
+
+.unify .node-body {
+	margin-bottom: 5px;
+}
+
+/***********************************客户分群＝�?�客户视图＝》视图查看器  end*************************/
+	/**********客户分群＝�?�客户视图＝》视图节点样ￄ1¤7 begin*************************/
+.unify-info  th,.unify-info td {
+	font-size: 12px;
+	word-break: keep-all; /*ie*/
+	white-space: nowrap; /*firefox*/
+}
+
+.unify-info-font1 {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.unify-info-font10 {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.unify-info-font11 {
+	font-size: 12px;
+}
+
+.unify-info-font2 {
+	color: #D61620;
+}
+
+.unify-info-font3 {
+	font-weight: bold;
+	font-size: 14px;
+	color: #D61620;
+}
+
+.unify-info-font4 {
+	font-size: 14px;
+}
+
+.unify-info-font5 {
+	font-weight: bold;
+	color: #000000;
+}
+
+.unify-info-font6 {
+	font-weight: bold;
+	color: #D61620;
+}
+
+.unify-info-layout2 {
+	padding-left: 5px;
+}
+
+.unify-info-layout3 {
+	width: 280px;
+}
+
+.unify-info-layout4 {
+	width: 10px;
+}
+
+.unify-info-layout5 {
+	width: 12px;
+}
+
+.unify-info-layout6 {
+	width: 523px;
+}
+
+.unify-info-layout7 {
+	width: 240px;
+}
+
+.unify-info-layout8 {
+	width: 120px;
+}
+
+.unify-info-layout8 {
+	padding-right: 5px;
+}
+
+.unify-info-fieldset-pie {
+	margin: 0;
+	padding: 0 0 0 4px;
+}
+
+.unify-info-pie {
+	position: relative;
+	width: 100px;
+	height: 80px;
+}
+
+.unify-info-pie img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	clip: rect(auto, auto, 80px, auto);
+}
+
+.unify-info-border1 {
+	border-left: 1px solid #ECE9D8;
+}
+
+.unify-info-border2 {
+	border: 1px solid #ECE9D8;
+	background-color: #F8F8F8;
+}
+
+.unify-info-border3 {
+	margin-right: 10px;
+	border: 1px solid #E3E3E3;
+	width: 99.9%;
+}
+
+.unify-info-line1 {
+	border-top: 1px solid #0303FF;
+}
+
+.unify-info-line2 {
+	border-left: 1px solid #D28B7D;
+	padding-left: 5px;
+}
+
+.unify-info-line3 {
+	margin-left: 10px;
+	padding-bottom: 10px;
+	padding-top: -10px;
+	border-top: 1px solid #D28B7D;
+	border-top-style: dashed;
+}
+
+.unify-info-line4 {
+	border-top: 1px solid #E3E3E3;
+}
+
+.unify-info-line5 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #FFC300;
+}
+
+.grid_plan {
+	TABLE.grid_plan {BORDER: 0px solid #6188EF;BORDER-COLLAPSE: collapse;border-spacing: 0;width: 100%}
+	TABLE.grid_plan THEAD {FONT-WEIGHT: bold;font-size: 11pt;BACKGROUND-COLOR: #D7E1FB;color: #0000A0;text-align: center}
+	TABLE.grid_plan TH {PADDING: 5px 0;border: 0px solid #B4C7FE;font-size: 12px}
+	TABLE.grid_plan TD {BORDER: #B4C7FE 0px solid;padding: 2px 0px 2px 2px;font-size: 12px;height:  28px;width: 20%;}
+}
+A.more {
+	BACKGROUND-IMAGE: url(../../../resources/base/img/icon_more.gif); 
+	POSITION: absolute;
+	 LINE-HEIGHT: 10px; 
+	 WIDTH: 40px; 
+	 DISPLAY: block; 
+	 BACKGROUND-REPEAT: no-repeat; 
+	 HEIGHT: 10px; 
+	 RIGHT: 4px; 
+	 TEXT-DECORATION: none
+}
+
+
+table.grid50 {
+	border: 1px solid #D1D1D1;
+	border-top: 1;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 99.4%;
+	margin-left:3px;
+}
+
+table.grid50 thead {
+	font-size: 11pt;;
+	background-color: #EFEFEF;
+}
+
+table.grid50 th {
+	padding: 3px 0;
+	border: 1px solid #BC8F8F;
+	font-size: 13px;
+	text-align: center;
+	background-color: #F2F2F2;
+	font-family: "宋体";
+	height: 1px; 
+}
+
+table.grid50 tr{
+	height: 23px;
+}
+
+table.grid50 td {
+	border: #BC8F8F 1px solid;
+	padding: 2px;;
+	font-size: 12px;
+}
+ 
+table.grid50 .odd {
+	background-color: #e7f3c6;
+}
+
+
+table.grid51 {
+	border-top: 1;
+	border-spacing: 0;
+	width: 99.8%;
+	font-size:12px;
+}
+
+table.grid51 tr{
+	height: 23px;
+}
+
+table.grid51 td {
+	padding: 2px;;
+	font-size: 12px;
+}
+ 
+table.grid51 .odd {
+	background-color: #FCFCFC;
+}
+
+td.calBox {
+	text-align: center;
+	border: 1px solid #CCDDEE;
+	width: 150px;
+	height: 80px;
+	vertical-align: top;
+}
+
+/* 每日单元格内日期样式 */
+td.calBox div.date {
+	background: #f7e8f0;
+	font-size: 12px;
+	padding: 2px;
+	cursor: pointer;
+}
+
+/* 每日单元格内周六周日样式 */
+td.sat div.date,td.sun div.date {
+	color: red;
+}
+
+/* 今日样式 */
+td.calBox div.today {
+	background: #f9b4b7;
+}
+
+/*日期下空的div*/
+div.emptyDiv {
+	width: 129px;
+	height: 67px;
+}
+
+/*添加，修改任务的div的上中下框的样式*/
+.topTb {
+	background: url(../../../resources/app/img/top-s.gif) no-repeat;
+	height: 35px;
+}
+
+.floorTb {
+	background: url(../../../resources/app/img/floor-s.gif) no-repeat;
+	height: 35px;
+}
+
+.centerTb {
+	background: url(../../../resources/app/img/center-s.gif);
+}
+
+/* 添加任务div样式 */
+#addBox {
+	display: none;
+	position: absolute;
+	width: 582px;
+	border: 0px;
+	height: 100px;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* 添加任务内日期样弄1¤7 */
+#taskDate {
+	font-weight: bold;
+	padding: 3px;
+}
+
+/* 按钮样式 */
+.taskBtn {
+	margin: 10px;
+}
+
+/* 编辑任务div样式 */
+#editBox {
+	display: none;
+	position: absolute;
+	width: 582px;
+	border: 0px;
+	height: 60px;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* 任务样式 */
+div.task {
+	width: 150px;
+	height: 67px;
+	white-space: normal;
+	background: #fafafa;
+	border: 1px solid #FFF;
+	padding: 1 2 1 3;
+	cursor: pointer;
+}
+
+/*何银芄1¤7 客户执行*/
+.marketTabsClass {
+	border-bottom: 7px solid #f5f5f5;
+	padding: 0;
+	margin: 0px 0px 0px 1px;
+	float: left;
+	width: 99.8%;
+}
+
+.marketTabsClass .selected {
+	cursor: auto;
+	color: #d0131a;
+	background: url(app/img/tabspan-title.gif) no-repeat;
+}
+
+.kboxt{
+	background-image: url(../../xframe/themes/default/img/common/table_bj_2.gif)!important;
+	color:#000000 !important;
+	height:20px !important;
+	font-size:9pt !important;
+	font-weight:bold !important;
+	padding-left:10px !important;
+	padding-right:0px !important;
+	border-top:0px !important;
+	border-right:0px !important;
+	border-left:0px !important;
+	border-bottom:2px solid #F68388 !important;
+	background-position: right;
+	background-repeat: repeat-y;
+}

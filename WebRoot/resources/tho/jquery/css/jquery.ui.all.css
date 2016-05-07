@@ -1,0 +1,13 @@
+@import "jquery.ui.base.css";
+@import "jquery.ui.theme.css";
+@import "jquery.jgrowl.css";
+.ui-widget-overlay{
+	z-index:9900!important;
+	overflow:hidden !important;
+}
+.ui-dialog {
+	z-index:9901!important;
+}
+.jGrowl{
+	z-index:8001!important;
+}
