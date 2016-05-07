@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+	">
+	<!--classes/database.properties配置文件配置方式 ,已经不建议使用 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:database.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="internalDataSource"
+		class="com.bonc.commons.jdbc.datasource.EncryptPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${driver}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${url}</value>
+		</property>
+		<property name="user">
+			<value>${username}</value>
+		</property>
+		<property name="password">
+			<value>${password}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${initialPoolSize}</value>
+		</property>
+		<property name="acquireIncrement">
+			<value>${acquireIncrement}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${maxPoolSize}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${maxIdleTime}</value>
+		</property>
+		<property name="encryptType">
+			<value>${encryptType}</value>
+		</property>
+	</bean>
+
+	<!--tomcatJNDI配置方式配置，默认JNDI名字为default，如果修改JNDI名字，请修改本配置的jndiName属性,数据源配置建议使用本方式 -->
+	<!--<bean id="internalDataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName" value="java:comp/env/jdbc/default"/> </bean> -->
+
+	<bean id="dataSource" class="com.bonc.commons.jdbc.datasource.SingleDataSource">
+		<property name="internalDataSource" ref="internalDataSource" />
+	</bean>
+
+	<bean id="jdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" />
+
+	<bean id="systemLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler"
+		lazy-init="true">
+		<property name="nativeJdbcExtractor" ref="jdbcExtractor" />
+	</bean>
+
+	<!-- 方言工厂 -->
+	<bean id="dialectFactory" class="com.bonc.commons.orm.ibatis.dialect.DialectFactoryImpl">
+		<property name="dialectMap">
+			<map>
+				<entry key="oracle" value="com.bonc.commons.orm.ibatis.dialect.OracleDialect" />
+				<entry key="mysql" value="com.bonc.commons.orm.ibatis.dialect.Db2Dialect" />
+				<entry key="db2" value="com.bonc.commons.orm.ibatis.dialect.Db2Dialect" />
+				<entry key="sqlserver"
+					value="com.bonc.commons.orm.ibatis.dialect.SqlServerDialect" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="sqlExecutor" class="com.bonc.commons.orm.ibatis.PaginationSqlExecutor">
+		<property name="dialectFactory" ref="dialectFactory" />
+	</bean>
+
+	<bean id="sqlMapClient" class="com.bonc.commons.orm.ibatis.SqlMapClientFactoryBean"
+		scope="prototype">
+		<property name="configLocation" value="classpath:sqlmap-config.xml" />
+		<property name="lobHandler" ref="systemLobHandler" />
+		<property name="sqlExecutor" ref="sqlExecutor" />
+	</bean>
+
+	<bean id="ibatisDao" class="com.bonc.commons.orm.ibatis.IbatisDaoImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="dialectFactory" ref="dialectFactory" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* *..*IbatisDao.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="insert*" />
+			<tx:method name="update*" />
+			<tx:method name="delete*" />
+			<tx:method name="execute*" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!--数据库常量配置 加载bean -->
+	<bean class="com.bonc.commons.properties.SetPropertiesByIbatis">
+		<property name="ibatisDao" ref="ibatisDao" />
+	</bean>
+
+
+	<!-- 以下为时间调度 -->
+	<bean name="refreshAccessToken" class="com.honest1994.quartz.RefreshAccessTokenTask">
+	</bean>
+
+	<bean name="weixinJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.honest1994.quartz.WeixinQuartzJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="refreshAccessTokenTask" value-ref="refreshAccessToken" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="weixinJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="weixinJob" />
+		<property name="repeatInterval" value="6000000" />
+		<property name="startDelay" value="5000" />
+	</bean>
+
+	<!-- <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> 
+		<property name="jobDetail" ref="runMeJob" /> <property name="cronExpression" 
+		value="0/5 * * * * ?" /> </bean> -->
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="weixinJob" />
+				
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="weixinJobTrigger" />
+			
+			</list>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="homepage">
+<!--爱心企业列表 -->
+<select id="loveCompanyList" resultClass="java.util.HashMap">  
+   SELECT * FROM (
+	SELECT T.COMPANY_LOGO,T.COMPANY_NAME,T.COMPANY_ID FROM HW.LOVE_COMPANY_INFO T 
+		 WHERE T.HOME_RECOMMEND = '1'
+  			ORDER BY  T.SERVICE_LEVEL DESC 
+	) WHERE  <![CDATA[ ROWNUM <=8   ]]>
+</select>     
+
+<!--爱心捐赠列表 -->
+<select id="donationList" resultClass="java.util.HashMap"> 
+ SELECT * FROM ( 
+   SELECT ID, TITLE, CONTENT,TO_CHAR(RELEASE_TIME,'YYYY-MM-DD') RELEASE_TIME, IMAGE_URL
+  FROM DONATION_INFO T
+ WHERE T.INFO_TYPE = '0' ORDER BY T.RELEASE_TIME DESC)
+   WHERE <![CDATA[ ROWNUM <=10   ]]> 
+</select> 
+
+<!-- 优秀企业推荐 --> 
+<select id="recCompanyList" resultClass="java.util.HashMap"> 
+SELECT  T.COMPANY_ID,T.COMPANY_ADDRESS,T.COMPANY_ADDRESS,T.COMPANY_CONTACTS,T.COMPANY_NAME,RECOMMENDED_REASONS
+	FROM HW.COMPANY_INFO T 
+	WHERE T.HOME_RECOMMEND=1
+	AND <![CDATA[ ROWNUM <=6   ]]> 
+</select> 
+
+
+<!--诚心求赠列表 -->
+<select id="forgiftsList" resultClass="java.util.HashMap">  
+SELECT * FROM ( 
+   SELECT ID, TITLE, TO_CHAR(RELEASE_TIME,'YYYY-MM-DD') RELEASE_TIME
+  FROM DONATION_INFO T
+ WHERE T.INFO_TYPE = '1' ORDER BY T.RELEASE_TIME DESC)
+   WHERE <![CDATA[ ROWNUM <=10   ]]> 
+</select>
+
+<!--查询供求列表 10条 首页-->
+ <select id="homeProvideList" resultClass="java.util.HashMap"> 
+    SELECT * FROM  (SELECT * FROM release_service_info t
+                            WHERE t.info_type = '0'
+                         ORDER BY t.release_time DESC)  WHERE ROWNUM &lt;11     
+</select>  
+
+<!--查询供需列表 10条 首页-->
+ <select id="homeDemandList" resultClass="java.util.HashMap"> 
+    SELECT * FROM  (SELECT * FROM release_service_info t 
+                            WHERE t.info_type = '1'
+     ORDER BY t.release_time DESC)  WHERE ROWNUM &lt;11 
+</select>
+<!--首页新闻中心列表 12条 -->
+<select id="getHomeNewsList" resultClass="java.util.HashMap">  
+SELECT * FROM	(SELECT * FROM tb_news_info t where t.news_type = '6' and t.news_status = '1' order by t.record_date desc) where rownum &lt;13 
+</select> 
+<!--首页政务列表 12条-->
+<select id="getHomeZWList" resultClass="java.util.HashMap">  
+SELECT * FROM	(SELECT * FROM tb_news_info t where t.news_type = '3' and t.news_status = '1' order by t.record_date desc) where rownum &lt;13
+</select> 
+
+<!--供需大类 9条-->
+<select id="getHomeLargeType" resultClass="java.util.HashMap">  
+select * from service_type_info t WHERE t.service_type_parent_id = '0' AND ROWNUM&lt;10 ORDER BY t.ord
+</select>
+<!--供需小类 全部-->
+<select id="getHomeSubType" resultClass="java.util.HashMap">  
+select * from service_type_info t WHERE t.service_type_parent_id != '0' ORDER BY t.ord
+</select>  
+
+
+<!--全局搜索-->
+<select id="search" resultClass="java.util.HashMap">  
+SELECT *
+  FROM TB_NEWS_INFO T
+ WHERE T.NEWS_STATUS = '1'
+   AND T.NEWS_TYPE IN ('1', '2', '3', '6', '7')
+   AND T.NEWS_TITLE LIKE '%$searchName$%' OR T.NEWS_INFO LIKE '%$searchName$%'
+   ORDER BY T.RECORD_DATE DESC
+</select> 
+
+<!--服务类型 workfrom码表 -->
+<select id="serviceList" resultClass="java.util.HashMap">  
+ SELECT t.code,t.code_name FROM workfrom.dic_KZ002 t WHERE sup_code IS NOT NULL
+</select> 
+
+<!--获取工单号 -->
+<select id="getOrderNo" resultClass="java.lang.String">  
+ SELECT workfrom.SEQ_SYS_ORDERNO.NEXTVAL FROM DUAL
+</select>   
+
+<!-- 网络下单 -->
+<insert id="addOrder">  
+ INSERT INTO workfrom.P_ORDER
+	(ORDERGUID,
+	 ORDERTYPE,
+	 ORDERNO,
+	 CLIENTNAME,
+	 CLIENTPHONE,
+	 SERVICEITEMS,
+	 SERVICEDEMAND,
+	 CLIENTINPHONE,
+	 SERVICEADDRESS,
+	 EMERGENCY,
+	 COMMITUSER,
+	 STATE,
+	 SERVICETIME) VALUES(#guid#,'Site',#orderNo#,#name#,#tel#,#serviceType#,#content#,#tel#,#address#,'一般','网站','待派单',to_date(#time#,'yyyy-mm-dd'))
+</insert> 
+
+<!-- 网络下单日志 -->
+<insert id="addOrderLog">  
+ INSERT INTO workfrom.P_ORDERLOG
+	(EVENTTYPE,GUID,TITLE,MESSBODY,COMMITUSER,COMMITDATE,REMARK) VALUES('创建工单',#guid#,'创建工单','网站创建工单','Site',sysdate,'创建工单-网站用户自主下单')
+</insert> 
+
+<!-- 电话下单 -->
+<insert id="addPreOrder">  
+ INSERT INTO workfrom.P_PRE_ORDER
+	(ORDERGUID,
+	 ORDERTYPE,
+	 ORDERNO,
+	 CLIENTNAME,
+	 CLIENTPHONE,
+	 EMERGENCY,
+	 COMMITUSER) VALUES(#guid#,'Site',#orderNo#,#name#,#tel#,'一般','网站')
+</insert> 
+<!--获取网站首页的订单信息 -->
+<select id="queryOrderMessage" resultClass="java.util.HashMap">  
+ SELECT 
+    COUNT(CASE WHEN T.STATE = '已派单' THEN 1 ELSE NULL END ) SUM_PD,
+    COUNT(CASE WHEN T.ORDERRESULTS = '成功' THEN 1 ELSE NULL END) SUM_SUC_CUS,
+    COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE)  THEN 1 ELSE NULL END) TODAY_AC,
+    COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE) AND T.STATE = '已派单' THEN 1 ELSE NULL END) TODAY_PD,
+    COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE) AND T.ORDERRESULTS = '成功' THEN 1 ELSE NULL END) TODAY_SUC_CUS
+ FROM workFrom.P_ORDER T WHERE T.ORDERTYPE = 'Site'
+</select> 
+
+<!--友情链接-->
+<select id="friendlyLinkList" resultClass="java.util.HashMap">  
+SELECT *
+  FROM HW.WEB_PICTURES T1
+ WHERE T1.PICTURES_SITE = 'friendly_link'
+ AND T1.PICTURES_STATE = '1'
+ ORDER BY T1.PICTURES_RANK
+</select> 
+
+<!--首页图片-->
+<select id="homePagePicList" resultClass="java.util.HashMap">  
+SELECT T1.*
+  FROM HW.WEB_PICTURES T1, HW.PICTURES_SITE T2
+ WHERE T1.PICTURES_SITE = T2.PICTURES_SITE(+)
+   AND T2.PICTURES_SITE IN ('index_news',
+                            'index_major_two',
+                            'index_major_one',
+                            'index_minor_two',
+                            'index_minor_one')
+     AND T1.PICTURES_STATE = '1'
+</select> 
+
+
+</sqlMap>

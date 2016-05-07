@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"/>
+    <typeHandler javaType="com.bonc.commons.orm.ibatis.support.BlobBytes"
+     callback="com.bonc.commons.orm.ibatis.support.BlobBytesTypeHandler"/>
+    
+    <typeHandler javaType="object"
+     callback="com.bonc.commons.orm.ibatis.support.CustomObjectTypeHandler"/>
+    
+	 <!--common包系统常量获取依赖-->
+    <sqlMap resource="com/bonc/commons/sqlmap-common.xml"/>
+   <!-- 首页 -->
+    <sqlMap resource="config/honest1994/homepage/sqlmap-homepage.xml"/> 
+   <!-- 员工信息 -->
+    <sqlMap resource="config/honest1994/staffinfo/sqlmap-staffinfo.xml"/> 
+  
+</sqlMapConfig>

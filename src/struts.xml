@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- struts2中action后缀名 -->
+	<constant name="struts.action.extension" value="action" />
+
+	<!-- 默认编码方式 -->
+	<constant name="struts.i18n.encoding" value="utf-8" />
+
+	<!-- 是否为开发模式，在开发模型中可以获得更多的跟踪信息 -->
+	<constant name="struts.devMode" value="false" />
+
+	<!-- 资源文件名称 -->
+	<constant name="struts.custom.i18n.resources" value="globalMessages" />
+
+	<!-- 在开发模式下启用 配置改变时自动加载 -->
+	<constant name="struts.convention.classes.reload" value="true" />
+
+	<!--  允许Ognl表达式访问静态方法-->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+
+	<!-- 上传文件的最大文件大小 -->
+	<constant name="struts.multipart.maxSize" value="10485760" />
+
+
+
+	<!-- 在寻找资源时是否忽略大小写 -->
+	<constant name="struts.configuration.classpath.forceLowerCase"
+		value="false" />
+
+	<!-- codebehind中查找action的返回结果资源时的默认文件夹 -->
+	<constant name="struts.codebehind.pathPrefix" value="/pages/" />
+	<include file="com/bonc/base/struts2/struts-base.xml" />
+ 
+	
+</struts>

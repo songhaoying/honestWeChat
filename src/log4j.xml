@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss} %l: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="rootLogger" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/rootLogger.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss} %l: %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="com.honest1994" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="sam" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.mchange" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="org.springframework" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.opensymphony.xwork2" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="org.apache.struts2" additivity="false">
+		<level value="warn" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.ibatis.common.logging" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</logger>
+
+	<logger name="com.ibatis" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Connection" additivity="true">
+		<level value="DEBUG" />
+	</logger>
+
+	<logger name="java.sql.Statement" additivity="true">
+		<level value="info" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<appender-ref ref="rootLogger" />
+	</root>
+
+</log4j:configuration>

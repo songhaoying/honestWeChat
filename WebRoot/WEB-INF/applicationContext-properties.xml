@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+	">
+	<bean class="com.bonc.base.util.SystemProperties">
+		<property name="properties"> 
+			<map>  
+			<!-- 该配置已不建议使用，建议使用struts2的head标签。 -->
+				<entry key="headIncludes">
+					<map>
+						<entry key="default">
+							<value>
+								<![CDATA[
+								<link href="$contextPath$/resources/css/css.css" rel="stylesheet" type="text/css"/>
+								<link href="$contextPath$/resources/css/lrtk.css" rel="stylesheet" type="text/css"/>
+								<link href="$contextPath$/resources/tho/jquery/css/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+								<link href="$contextPath$/resources/base/css/base.css" rel="stylesheet" type="text/css"/>
+								<link href="$contextPath$/resources/base/css/sh.css" rel="stylesheet" type="text/css"/>
+								<link href="$contextPath$/resources/xframe/css/xframe.css" rel="stylesheet" type="text/css"/>
+								<link type="image/x-icon" rel="shortcut icon" href="$contextPath$/favicon.ico" >
+								<script type="text/javascript" src="$contextPath$/resources/js/pptBox.js"></script>
+								<script type="text/javascript" src="$contextPath$/resources/js/util.js"></script>
+								<script type="text/javascript" src="$contextPath$/resources/Validform/jquery-1.9.1.min.js"></script> 
+								<script type="text/javascript" src="$contextPath$/resources/tho/jquery/jquery-ui-1.9.2.custom.min.js"></script>
+								<script type="text/javascript" src="$contextPath$/resources/Validform/Validform_v5.3.2.js"></script>
+								<script type="text/javascript" src="$contextPath$/resources/js/lrkf.js"></script>
+								<script type="text/javascript">$j = jQuery.noConflict();</script>
+								
+								<script type="text/javascript" src="$contextPath$/resources/tho/prototype/prototype.js"></script>
+								<script type="text/javascript" src="$contextPath$/resources/tho/My97DatePicker/WdatePicker.js" defer="defer"></script>
+								<script type="text/javascript" src="$contextPath$/resources/base/js/base.js"></script>
+								<script type="text/javascript">jQuery.extend(Bonc.Constants,{WEB_APP_CONTEXT_PATH:Bonc._getContextPath('/resources/base/js/base.js'),WEB_APP_ACTION_EXTENSION:'action',BLANK_IMAGE_URL:Bonc._getContextPath('/resources/base/js/base.js')+'/resources/base/s.gif'});</script>
+								]]>
+							</value>
+						</entry>
+					</map>
+				</entry>
+				<entry key="databaseUser">
+					<map>
+						<entry key="user"><value>hold</value></entry> 
+					</map>
+				</entry>
+				<entry key="defaultSystemTitle"><value>郑州奥特制衣有限公司</value></entry> 
+			</map>
+		</property>
+	</bean>
+	
+</beans>

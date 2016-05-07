@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server image="PNG" cache="Memory" minTimeout="5000" maxTimeout="30000"
+	cacheSize="100" throwException="true" maxThreads="20" gcInterval="3000"
+	compression="Default" useBuiltinXmlParser="true"
+	xmlParser="org.apache.xerces.parsers.SAXParser" useFlashFonts="false"
+	license="null" HOST="localhost" PORT="8802">
+	<folders>
+		<map key="images" value="Images" />
+		<map key="root" value="C:/WebCharts3D.Java2D/5.0/setup/package/." />
+		<map key="fonts" value="fonts" />
+		<map key="home" value="/res/html" />
+	</folders>
+	<trueType>
+	</trueType>
+	<mime>
+		<map key="application/pdf" value=".pdf" />
+		<map key="image/png" value=".png" />
+		<map key="image/jpeg" value=".jpg;.jpeg" />
+		<map key="text/vnd.wap.wml" value=".wml" />
+		<map key="application/x-shockwave-flash" value=".swf" />
+		<map key="image/svg-xml" value=".svg" />
+		<map key="text/html" value=".htm;.html" />
+		<map key="image/tiff" value=".tif;.tiff" />
+		<map key="text/text" value=".txt;.ini" />
+		<map key="application/octet-stream" value=".cab;.jar;.zip;.class" />
+		<map key="image/vnd.wap.wbmp" value=".wbmp" />
+		<map key="image/gif" value=".gif" />
+	</mime>
+	<plugins>
+		<map key="tif">
+    	<![CDATA[
+			<object width="%(width)" height="%(height)" classid="CLSID:106E49CF-797A-11D2-81A2-00E02C015623" %(attrs)>
+			<param name="src" value="%(src)"/>
+			<param name="toolbar" value="bottom"/>
+			<embed width="%(width)" height="%(height)" type="image/tiff" toolbar="bottom" %(attrs)
+				src="%(src)"
+				pluginspace="http://www.alternatiff.com"/>
+			</object>
+      ]]>
+		</map>
+		<map key="swf">
+    	<![CDATA[
+			<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" %(attrs)
+			 codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,2,0"
+			 ID="%(id)" name="%(name)" WIDTH="%(width)" HEIGHT="%(height)">
+			 	<PARAM NAME="wmode" VALUE="transparent"/>
+				<PARAM NAME="movie" VALUE="%(src)"/>
+				<PARAM NAME="quality" VALUE="high"/>
+				<PARAM NAME="bgcolor" VALUE="#FFFFFF"/>
+			<embed wmode="transparent" src="%(src)" %(attrs)
+					quality="high" bgcolor="#FFFFFF" WIDTH="%(width)" HEIGHT="%(height)" TYPE="application/x-shockwave-flash"
+			 PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash">
+			</EMBED>
+			</OBJECT>
+      ]]>
+		</map>
+		<map key="pdf">
+      <![CDATA[
+			<embed width="%(width)" height="%(height)" src="%(src)" type="application/pdf" %(attrs)
+				pluginspage="http://www.adobe.com/support/downloads/main.html">
+			</embed>
+      ]]>
+		</map>
+		<map key="map">
+      <![CDATA[
+			<script type="text/javascript">
+			var xx_tableId=null;
+			var xx_set_visible=function(imageID, id, e, value){
+				if(value){
+					xx_tableId=id;
+				}else{
+					if(xx_tableId==null){xx_tableId=id;}
+				}
+				if (!xx_supported_client()) return ;
+				xx_get_by_id(id).style.visibility= value ? "visible" : "hidden";
+				if(value) xx_move_tag(imageID,id,e);
+				xx_get_by_id(id).style.display=value ? "" : "none";
+			};
+			var xx_onclick_tag=function(event,clickF){
+				var ar=self_getPointArray();
+				if(clickF)
+					clickF(ar[0],ar[1],ar[2],event);
+			};
+			var xx_move_tag=function(imageID, id,e){
+				if (!xx_supported_client()) return ;
+				var popup=$(id);
+			    popup.style.left=Event.pointerX(e)-Math.round(popup.getWidth()/2)+"px";
+			    popup.style.top=Event.pointerY(e)-popup.getHeight()-10+"px" ;
+			    if(xx_tableId==null){xx_tableId=id;}
+			};
+			var self_getPointArray=function(){
+				var x,y,s;
+				var etr=$(xx_tableId).down('tr');
+				var n=etr.siblings().size();
+				if(n==1){
+					var valueObj=etr.down('td');
+					if(valueObj.siblings().size()>0){//普通图形，一个tr有2个TD,取最后一个Td					
+						x=etr.down('td').next().innerHTML;
+						y=etr.next().down('td').next().innerHTML;
+					}else{//冒泡图一个tr只有一个td
+						x=etr.down('td').innerHTML;
+						y=etr.next().down('td').innerHTML;
+					}
+					s="";
+				}else if(n==2){
+					var valueObj=etr.down('td');
+					if(valueObj.siblings().size()>0){		
+						s=etr.down('td').next().innerHTML;
+						x=etr.next().down('td').next().innerHTML;
+						y=etr.next(1).down('td').next().innerHTML;
+					}else{		
+						s=etr.down('td').innerHTML;
+						x=etr.next().down('td').innerHTML;
+						y=etr.next(1).down('td').innerHTML;
+					}
+				}
+				return new Array(x,y,s);
+			};
+			
+			var xx_less=function(l,r) { return Math.max(l-r,0) == 0 ; /* l LE r */};
+			var xx_and=function(l, r) { return   !(!l || !r);         /*l AND r */};
+			var xx_supported_client=function () { 	return (document.all) || (document.getElementById);};
+			var xx_get_by_id=function(id) { return document.all? document.all[id]: document.getElementById? document.getElementById(id) : "" };
+			</script>
+       ]]>
+		</map>
+		<map key="svg">
+       <![CDATA[
+				<embed width="%(width)" height="%(height)" src="%(src)" type="image/svg-xml" %(attrs)
+					pluginspage="http://www.adobe.com/svg/viewer/install/main.html">
+				</embed>
+       ]]>
+		</map>
+	</plugins>
+	<fontMap>
+		<map key="timesroman" value="Times New Roman" />
+		<map key="dialog" value="Arial" />
+		<map key="helvetica" value="Arial" />
+		<map key="sansserif" value="Arial" />
+		<map key="serif" value="Times New Roman" />
+		<map key="dialoginput" value="Arial" />
+		<map key="monospased" value="Courier New" />
+		<map key="helv" value="Arial" />
+		<map key="courier" value="Courier New" />
+	</fontMap>
+	<fonts value="*.fft" />
+</server>

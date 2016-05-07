@@ -1,0 +1,271 @@
+<!DOCTYPE sqlMap
+	PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="staffinfo">
+
+	<!-- 联通手机用户信息 -->
+	<select id="queryUnicomInfo" resultClass="com.honest1994.pojo.UnicomManInfo">
+		SELECT A.USER_NO AS "userNo",
+		A.DEVICE_NUMBER AS "deviceNumber",
+		A.CUSTOMER_NO AS "custNo",
+		A.AREA_DESC AS "areaDesc",
+		A.CITY_DESC AS "cityDesc",
+		TO_CHAR(A.FIRST_CALL_TIME, 'yyyy-MM-DD') AS "firstCallTime",
+		A.OFFICE AS "innetOffice",
+		A.HIGH_TYPE_DESC AS "highType",
+		A.USER_NAME AS "userName",
+		A.ID_NO AS "idNo"
+		FROM HOLD_INFO_USER A where 1=1
+		<dynamic>
+			<isNotEmpty property="deviceNumber" prepend="AND">
+				a.device_number = #deviceNumber#
+			</isNotEmpty>
+
+			<isNotEmpty property="idNo" prepend="AND">
+				a.id_no = #idNo#
+			</isNotEmpty>
+
+			<isNotEmpty property="userName" prepend="AND">
+				a.user_name = #userName#
+			</isNotEmpty>
+
+		</dynamic>
+		
+		and rownum <![CDATA[<=100 ]]> 
+		
+	</select>
+
+	<!-- 根据姓名查询员工信息 -->
+	<select id="queryStaffInfoByStaffName" resultClass="com.honest1994.pojo.StaffInfo">
+		SELECT STAFF_NO AS "staffNo",
+		STAFF_NAME AS "staffName",
+		JOB_TITLE AS "jobTitle",
+		DECODE(t.is_hidden_wexin,'1','隐藏', nvl(LINE_PHONE,'无')) AS "linePhone",
+		DECODE(t.is_hidden_wexin,'1','隐藏','0',
+		nvl(MOBILE,'无'),nvl(mobile,'无')) AS "mobile",
+		decode(t.is_hidden_wexin,'1','隐藏',NVL(SMALL_PHONE, '无')) AS
+		"smallPhone",
+		WECHAT AS "wechat",
+		DEPT_NO AS "deptNo",
+		OPEN_ID AS "openId"
+		FROM HONEST_TELPHONE_BOOK T
+		WHERE T.STAFF_NAME LIKE '%$staffName$%' or upper(t.staff_name_py) like
+		upper('%$staffName$%')
+		ORDER BY to_number(T.STAFF_NO)
+	</select>
+
+	<!-- 根据员工编号查询员工信息 -->
+	<select id="queryStaffInfoByStaffNo" resultClass="com.honest1994.pojo.StaffInfo">
+		SELECT STAFF_NO AS "staffNo",
+		STAFF_NAME AS "staffName",
+		JOB_TITLE AS "jobTitle",
+		DECODE(t.is_hidden_wexin,'1','隐藏', nvl(LINE_PHONE,'无')) AS "linePhone",
+		DECODE(t.is_hidden_wexin,'1','隐藏','0',
+		nvl(MOBILE,'无'),nvl(mobile,'无')) AS "mobile",
+		decode(t.is_hidden_wexin,'1','隐藏',NVL(SMALL_PHONE, '无')) AS
+		"smallPhone",
+		WECHAT AS "wechat",
+		DEPT_NO AS "deptNo",
+		OPEN_ID AS "openId"
+		FROM HONEST_TELPHONE_BOOK T
+		WHERE t.staff_no ='$staffNo$'
+	</select>
+	
+	<!-- 根据员工编号查询员工工资 -->
+	
+	
+	
+	<!-- 根据openid (微信的唯一编号） 编号查询员工工资 -->
+	
+	<select id="queryStaffPayByOpenId" resultClass="java.util.HashMap">
+		   SELECT *
+  FROM (SELECT B.ACCT_MONTH "工资月份",
+               B.STAFF_NO "员工编号",
+               B.STAFF_NAME "员工姓名",
+               TO_CHAR(NVL(B.JIBENGONGZI, 0), '99999990.99') "基本工资",
+               TO_CHAR(NVL(B.YIBU, 0), '999990.99') "医补",
+               TO_CHAR(NVL(B.XIAOSHI, 0), '999990.99') "小时",
+               TO_CHAR(NVL(B.JIABAN, 0), '999990.99') "加班",
+               TO_CHAR(NVL(B.HUOSHIBUZHU, 0), '999990.99') "伙食补助",
+               TO_CHAR(NVL(B.JIAOTONGBUZHU, 0), '999990.99') "交通补助",
+               TO_CHAR(NVL(B.DIANHUAFEI, 0), '999990.99') "电话费",
+               TO_CHAR(NVL(B.BUZHU, 0), '999990.99') "补助",
+               TO_CHAR(NVL(B.ZHILIANGJIANG, 0), '999990.99') "质量奖",
+               TO_CHAR(NVL(B.TONGCHOUBUZHU, 0), '999990.99') "统筹补助",
+               TO_CHAR(NVL(B.CHUQIN, 0), '999990.99') "出勤",
+               TO_CHAR(NVL(B.YINGFASHU, 0), '999990.99') "应发数",
+               TO_CHAR(NVL(B.YINGKOUKAOQIN, 0), '999990.99') "应扣考勤",
+               TO_CHAR(NVL(B.YINGKOUCANBU, 0), '999990.99') "应扣餐补",
+               TO_CHAR(NVL(B.JIANGLI, 0), '999990.99') "奖励",
+               TO_CHAR(NVL(B.GONGZUOZHILIANGKOUKUAN, 0), '999990.99') "工作质量扣款",
+               TO_CHAR(NVL(B.BUSHANGYUE, 0), '999990.99') "补上月",
+               TO_CHAR(NVL(B.SHIFASHU, 0), '9999900.99') "实发数",
+               NVL(B.MEMO,'') "备注信息"
+          FROM HONEST_TELPHONE_BOOK A, HONEST_STAFF_PAYROLL B
+         WHERE A.STAFF_NO = B.STAFF_NO
+           AND A.OPEN_ID =  '$openId$'
+         ORDER BY B.ACCT_MONTH DESC)
+ WHERE ROWNUM = 1
+</select>
+	
+
+<!-- 公共信息查询 -->
+<select id="queryCommInfo"  resultClass="java.util.HashMap">
+SELECT T.INFO_NAME, T.INFO_VALE
+  FROM HONEST_COMM_INFO T
+ WHERE T.INFO_NAME = '$value$'
+</select>
+
+	<!-- 根据微信的opendID编号查询员工信息 -->
+	<select id="queryStaffInfoByOpenID" resultClass="com.honest1994.pojo.StaffInfo">
+		SELECT STAFF_NO AS "staffNo",
+		STAFF_NAME AS "staffName",
+		JOB_TITLE AS "jobTitle",
+		DECODE(t.is_hidden_wexin,'1','隐藏', nvl(LINE_PHONE,'无')) AS "linePhone",
+		DECODE(t.is_hidden_wexin,'1','隐藏','0',
+		nvl(MOBILE,'无'),nvl(mobile,'无')) AS "mobile",
+		decode(t.is_hidden_wexin,'1','隐藏',NVL(SMALL_PHONE, '无')) AS
+		"smallPhone",
+		WECHAT AS "wechat",
+		DEPT_NO AS "deptNo",
+		OPEN_ID AS "openId"
+		FROM HONEST_TELPHONE_BOOK T
+		WHERE t.open_id =#openID#
+	</select>
+
+	<!-- 绑定员工的微信ID -->
+	<update id="bandStaffById">
+		UPDATE honest_telphone_book a SET a.open_id= #openID# WHERE
+		a.staff_no='$staffNo$'
+	</update>
+
+	<!-- 插入微信用户 -->
+	<insert id="insertWeiXinUser" >
+	INSERT INTO HONEST_WEIXIN_USER
+  (OPEN_ID,
+   NICK_NAME,
+   COUNTRY,
+   SEX,
+   PROVINCE,
+   CITY,
+   SUBSCRIBE,
+   SUBSCRIBE_TIME,
+   LANGUAGE,
+   HEAD_IMG_URL,
+   REMARK,
+   GROUP_ID,
+   UNIONID)
+VALUES
+  (#openid#,#nickname#,#country#,#sex#,#province#,#city#,#subscribe#,#subscribe_time#,#language#,#headimgurl#,#remark#,#groupid#,#unionid#
+      )
+</insert>
+	<!-- 删除指定微信用户 -->
+	<delete id="deleteWeiXinUser" >
+	delete from HONEST_WEIXIN_USER
+  where open_id=#openid#
+</delete>
+
+<!-- 取消关注 -->
+<update id="unsubscribe">
+UPDATE HONEST_WEIXIN_USER A
+   SET A.CANCEL_TIME = SYSDATE, A.SUBSCRIBE = '0'
+ WHERE A.OPEN_ID = '$value$'
+</update>
+
+	<!--全局搜索 -->
+	<select id="search" resultClass="java.util.HashMap">
+		SELECT *
+		FROM TB_NEWS_INFO T
+		WHERE T.NEWS_STATUS = '1'
+		AND T.NEWS_TYPE IN ('1', '2', '3', '6', '7')
+		AND T.NEWS_TITLE LIKE '%$searchName$%' OR T.NEWS_INFO LIKE
+		'%$searchName$%'
+		ORDER BY T.RECORD_DATE DESC
+	</select>
+
+	<!--服务类型 workfrom码表 -->
+	<select id="serviceList" resultClass="java.util.HashMap">
+		SELECT t.code,t.code_name FROM workfrom.dic_KZ002 t WHERE sup_code IS NOT
+		NULL
+	</select>
+
+	<!--获取工单号 -->
+	<select id="getOrderNo" resultClass="java.lang.String">
+		SELECT workfrom.SEQ_SYS_ORDERNO.NEXTVAL FROM DUAL
+	</select>
+
+	<!-- 网络下单 -->
+	<insert id="addOrder">
+		INSERT INTO workfrom.P_ORDER
+		(ORDERGUID,
+		ORDERTYPE,
+		ORDERNO,
+		CLIENTNAME,
+		CLIENTPHONE,
+		SERVICEITEMS,
+		SERVICEDEMAND,
+		CLIENTINPHONE,
+		SERVICEADDRESS,
+		EMERGENCY,
+		COMMITUSER,
+		STATE,
+		SERVICETIME)
+		VALUES(#guid#,'Site',#orderNo#,#name#,#tel#,#serviceType#,#content#,#tel#,#address#,'一般','网站','待派单',to_date(#time#,'yyyy-mm-dd'))
+	</insert>
+
+	<!-- 网络下单日志 -->
+	<insert id="addOrderLog">
+		INSERT INTO workfrom.P_ORDERLOG
+		(EVENTTYPE,GUID,TITLE,MESSBODY,COMMITUSER,COMMITDATE,REMARK)
+		VALUES('创建工单',#guid#,'创建工单','网站创建工单','Site',sysdate,'创建工单-网站用户自主下单')
+	</insert>
+
+	<!-- 电话下单 -->
+	<insert id="addPreOrder">
+		INSERT INTO workfrom.P_PRE_ORDER
+		(ORDERGUID,
+		ORDERTYPE,
+		ORDERNO,
+		CLIENTNAME,
+		CLIENTPHONE,
+		EMERGENCY,
+		COMMITUSER) VALUES(#guid#,'Site',#orderNo#,#name#,#tel#,'一般','网站')
+	</insert>
+	<!--获取网站首页的订单信息 -->
+	<select id="queryOrderMessage" resultClass="java.util.HashMap">
+		SELECT
+		COUNT(CASE WHEN T.STATE = '已派单' THEN 1 ELSE NULL END ) SUM_PD,
+		COUNT(CASE WHEN T.ORDERRESULTS = '成功' THEN 1 ELSE NULL END) SUM_SUC_CUS,
+		COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE) THEN 1 ELSE NULL
+		END) TODAY_AC,
+		COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE) AND T.STATE = '已派单' THEN 1
+		ELSE NULL END) TODAY_PD,
+		COUNT(CASE WHEN TRUNC(T.COMMITDATE) = TRUNC(SYSDATE) AND T.ORDERRESULTS = '成功'
+		THEN 1 ELSE NULL END) TODAY_SUC_CUS
+		FROM workFrom.P_ORDER T WHERE T.ORDERTYPE = 'Site'
+	</select>
+
+	<!--友情链接 -->
+	<select id="friendlyLinkList" resultClass="java.util.HashMap">
+		SELECT *
+		FROM HW.WEB_PICTURES T1
+		WHERE T1.PICTURES_SITE = 'friendly_link'
+		AND T1.PICTURES_STATE = '1'
+		ORDER BY T1.PICTURES_RANK
+	</select>
+
+	<!--首页图片 -->
+	<select id="homePagePicList" resultClass="java.util.HashMap">
+		SELECT T1.*
+		FROM HW.WEB_PICTURES T1, HW.PICTURES_SITE T2
+		WHERE T1.PICTURES_SITE = T2.PICTURES_SITE(+)
+		AND T2.PICTURES_SITE IN ('index_news',
+		'index_major_two',
+		'index_major_one',
+		'index_minor_two',
+		'index_minor_one')
+		AND T1.PICTURES_STATE = '1'
+	</select>
+
+
+</sqlMap>
