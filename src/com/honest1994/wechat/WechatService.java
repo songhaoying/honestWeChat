@@ -379,7 +379,7 @@ public class WechatService {
 					
 				
 					message.setTemplate_id("cspAlrWNRnjGRUXfehTxztApcOKLcb7PjSG2YP0Yh50");
-					
+					message.setUrl(user.getHeadimgurl()); //增加关注者的头像
 					Map<String,Map<String,String>> data=new HashMap<String,Map<String,String>>();
 					Map<String,String> maps1 =new HashMap<String,String>();
 					maps1.put("value", "测试消息：刚刚 "+user.getNickname() +" 关注了奥特制衣微信公众号");
